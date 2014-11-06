@@ -38,6 +38,8 @@ Route::get('author', function()
 });
 
 
+	Route::get('orderlist', 'OrderController@showOrder');
+
 
 
 
@@ -61,8 +63,8 @@ Route::get('author', function()
 	});
 	
 	Route::get('main', 'HomeController@showMainpage');
-	Route::post('order', 'HomeController@showOrder');
+//	Route::post('order', 'OrderController@showForm');
+	Route::post('order', 'OrderController@storeOrder');
 	
 	});//end route group
-
 	

@@ -14,7 +14,7 @@
         {{ HTML::script('js/jquery-1.11.1.min.js') }}
         {{ HTML::script('js/bootstrap.min.js') }}
 		{{ HTML::script('js/bootstrapValidator.min.js') }}  <!-- validation -->
-		
+		{{ HTML::script('js/jquery.tabletojson.min.js') }}  <!-- convert table to JSON -->
 		
 		
 	@section('script')

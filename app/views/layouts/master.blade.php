@@ -1,16 +1,26 @@
 <!DOCTYPE html>
 <html>
     <head>
+
         <title>
             @yield('title')
         </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
+		
         <!-- CSS are placed here -->
         {{ HTML::style('css/bootstrap.css') }}
         {{ HTML::style('css/bootstrap-theme.css') }}
 
+		<!-- Scripts are placed here -->
+        {{ HTML::script('js/jquery-1.11.1.min.js') }}
+        {{ HTML::script('js/bootstrap.min.js') }}
+		
+		@section('script')
+		<!-- add script here-->
+		@show
+	
     </head>
 
     <body>
@@ -67,9 +77,7 @@
 		</div> 
 		<!--/footer -->  
 	
-        <!-- Scripts are placed here -->
-        {{ HTML::script('js/jquery-1.11.1.min.js') }}
-        {{ HTML::script('js/bootstrap.min.js') }}
+
 
     </body>
 </html>

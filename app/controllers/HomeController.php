@@ -26,13 +26,5 @@ class HomeController extends BaseController {
 		return View::make('main');
 	}
 	
-	public function showOrder()
-	{
-	
-	    $data = Input::all();
-		$commnet = Input::get('comment');
-		//$table = Input::get('table');
-		return View::make('order')->with("data",$data);
-	}
 	
 	}

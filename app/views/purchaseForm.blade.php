@@ -27,14 +27,7 @@
 	
 	//set the function of save form button on every modal
 	$(".formSave").click(function(){
-	
 
-	
-	
-	
-	
-	
-	
 	//get radio group selected value
 	$option = $("input:radio[name='radioGroup']:checked").val();
 	
@@ -77,7 +70,9 @@
 	if(editTag =='new'){
 	//add new row to form table
 	
-	var formValue = "<tr><td>"+demoURL+"</td>"+
+	var formValue = 
+	"<tr><td style='display:none;'>Template</td>"+
+	"<td>"+demoURL+"</td>"+
 	"<td>"+orderURL+"</td>"+
 	"<td>"+description+"</td>"+
 	"<td>"+price+"</td>"+
@@ -117,21 +112,16 @@
 	//renew the total price
 	totalPrice();
 	
+	//save table value into tableData
+	//var tableData = $("#formListTable :input").serializeArray();
+	
+	var tableData = $("#formListTable").tableToJSON({ 
+	ignoreColumns: [5]}); //convert table value to JSON and ignore the 5th column	
+	var tableDataString = JSON.stringify(tableData);
+	
+	$("#tableJSON").val(tableDataString);
+	
 	});// end formSave function
-	
-	
-	//set function of submit button
-	$("#submit").click(function(){
-	
-	alert('hello world');
-	
-	});// end submit button
-	
-	
-	
-	
-	
-	
 	
 	
    $(".formCancel").click(function(){
@@ -192,16 +182,16 @@
 	var type = $(this).closest("div").attr('id');
 	
 	//get the value of first cell in this table, namely the demo URL
-	var dURL = $(this).closest('tr').find('td:eq(0)').text();
+	var dURL = $(this).closest('tr').find('td:eq(1)').text();
 	
 	//get the value of second cell in this table, namely the order URL
-	var oURL = $(this).closest('tr').find('td:eq(1)').text();
+	var oURL = $(this).closest('tr').find('td:eq(2)').text();
 	
 	//get the value of third cell in this table, namely description
-	var description = $(this).closest('tr').find('td:eq(2)').text();
+	var description = $(this).closest('tr').find('td:eq(3)').text();
 	
 	//get the value of third cell in this table, namely the price
-	var price = $(this).closest('tr').find('td:eq(3)').text();
+	var price = $(this).closest('tr').find('td:eq(4)').text();
 	
     if(type == "enterpriseDiv"){
 	$('#enterpriseEmailModal').modal();
@@ -218,7 +208,7 @@
 	}
 	
 	formIndex = $(this).closest("tr").index();
-	alert('Row: ' + formIndex);
+	//alert('Row: ' + formIndex);
 	
 	}//end Edit funtion
 	
@@ -335,9 +325,10 @@ Purchase Form Test
 		<div class="col-md-10 col-md-offset-1"> <!-- center a div-->
 		<div class="well">
 	    <!-- Form List Content -->
-		<table id='formListTable' name="formListTable" class='table table-bordered'>
+		<table id='formListTable' class='table table-bordered'>
 		<thead>
 		<tr>
+		    <th style='display:none;'>Type</th>
 			<th>Demo URL</th>
 			<th>Order URL</th>
 			<th>Description</th>
@@ -362,13 +353,17 @@ Purchase Form Test
 	<div class="row">
 	<div class="col-md-8 col-md-offset-2"> <!-- center a div-->
 	<div class="well">
+	
+	<!-- will be used to show any messages -->
+	@if (Session::has('message'))
+    <div class="alert alert-info">{{ Session::get('message') }}</div>
+	@endif
+	
 	<!-- Form comment and submit -->
-	
-	
 	<div class="row">
     <label for="requestDate" class="col-sm-4 control-label">Requested Date</label>
     <div class="col-sm-3">
-      <input type="text" class="form-control" id="requestDate" readonly='readonly' value='<?php $now = new DateTime(); echo $now->format('Y-m-d');?>'>
+      <input type="text" class="form-control" id="requestDate" name="requestDate" readonly='readonly' value='<?php $now = new DateTime(); echo $now->format('Y-m-d');?>'>
     </div>
 
     <label for="totalPrice" class="col-sm-2 control-label">Total Price</label>
@@ -385,6 +380,7 @@ Purchase Form Test
 	<div class='col-md-12 text-center'>
     <!-- <button id='submit' class='btn btn-info'>Submit </button> -->
 	
+	{{ Form::hidden('tableData',"", array('id' => 'tableJSON')) }}
 	{{ Form::submit('Create the Nerd!', array('class' => 'btn btn-primary')) }}
 
 	{{ Form::close() }}
