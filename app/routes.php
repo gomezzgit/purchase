@@ -63,8 +63,8 @@ Route::get('author', function()
 	});
 	
 	Route::get('main', 'HomeController@showMainpage');
-//	Route::post('order', 'OrderController@showForm');
-	Route::post('order', 'OrderController@storeOrder');
+	Route::post('order', 'OrderController@showForm');  //for test
+//	Route::post('order', 'OrderController@storeOrder');
 	
 	});//end route group
 	
