@@ -14,6 +14,8 @@
         {{ HTML::script('js/jquery-1.11.1.min.js') }}
         {{ HTML::script('js/bootstrap.min.js') }}
 		{{ HTML::script('js/bootstrapValidator.min.js') }}  <!-- validation -->
+		{{ HTML::script('js/jquery.dataTables.min.js') }}  <!-- dataTable-->
+		{{ HTML::script('js/dataTables.bootstrap.js') }}  <!-- dataTable -->
 		
 		
 		
@@ -32,13 +34,12 @@
 				<a class="navbar-brand" rel="home" href="http://acnw.com.au">ACNW</a>
 			</div>
 			<div class="collapse navbar-collapse">	
-				<ul class="nav navbar-nav">
-					<li><a href="#">Home</a></li>
+				<ul class="nav navbar-nav">					
 				</ul>
 			<div class="col-sm-3 col-md-3 pull-right">		
 				<ul class="nav navbar-nav navbar-right">
-				<li><a href="#">Contact</a></li>
-				<li><a href="#">Logout</a></li>
+				@yield('navigation_right')	
+				<li><a href="logout">Logout</a></li>
 				</ul>
 			</div>		
 			</div>
@@ -58,20 +59,8 @@
 		<!--/.HEADER -->
 		
         <!-- Container -->
-        <div class="container">		
-		
-		    <div class="row">
-				<div class="col-md-8 col-md-offset-2"> <!-- center a div-->
-				<div class="well">
-				<!--Add Form Content -->
+		<!--Add Form Content -->
 				@yield('content')
-				</div>
-				</div>
-			</div>
-			
-			<hr><!-- line-->
-			
-        </div>
 		<!-- /.Container -->
 		
 		<!-- Footer -->

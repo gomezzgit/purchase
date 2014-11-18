@@ -5,7 +5,7 @@ use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableTrait;
 use Illuminate\Auth\Reminders\RemindableInterface;
 
-class Template extends Eloquent implements UserInterface, RemindableInterface {
+class Plugin extends Eloquent implements UserInterface, RemindableInterface {
 
 use UserTrait, RemindableTrait;
 
@@ -14,7 +14,7 @@ use UserTrait, RemindableTrait;
  *
  * @var string
  */
-protected $table = 'template';
+protected $table = 'plugin';
 
 protected $fillable = ['id', 'orderid', 'type','demoURL',
 			'orderURL','description','price'];

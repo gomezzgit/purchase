@@ -34,7 +34,7 @@ class AuthController extends BaseController {
         /* Try to authenticate the credentials */
         if(Auth::attempt($credentials)) 
         {
-            // we are now logged in, go to admin
+            // we are now logged in, go to main page
             return Redirect::to('main');
 		   //return View::make('purchaseForm')->with('name',$name);
         }

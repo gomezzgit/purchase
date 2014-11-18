@@ -5,7 +5,7 @@ use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableTrait;
 use Illuminate\Auth\Reminders\RemindableInterface;
 
-class Template extends Eloquent implements UserInterface, RemindableInterface {
+class Domainname extends Eloquent implements UserInterface, RemindableInterface {
 
 use UserTrait, RemindableTrait;
 
@@ -14,10 +14,10 @@ use UserTrait, RemindableTrait;
  *
  * @var string
  */
-protected $table = 'template';
+protected $table = 'domainname';
 
-protected $fillable = ['id', 'orderid', 'type','demoURL',
-			'orderURL','description','price'];
+protected $fillable = ['id', 'orderid', 'type','name',
+			'serviceYear','description','price'];
 
 /**
  * Disabling Auto Timestamps

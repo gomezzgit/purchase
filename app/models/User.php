@@ -15,7 +15,7 @@ use UserTrait, RemindableTrait;
  * @var string
  */
 protected $table = 'users';
-
+protected $fillable = ['id', 'name', 'email', 'password','authority','remember_token'];
 
 /**
  * The attributes excluded from the model's JSON form.

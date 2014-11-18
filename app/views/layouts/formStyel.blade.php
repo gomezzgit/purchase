@@ -37,8 +37,8 @@
 				</ul>
 			<div class="col-sm-3 col-md-3 pull-right">		
 				<ul class="nav navbar-nav navbar-right">
-				<li><a href="#">Contact</a></li>
-				<li><a href="logout">Logout</a></li>
+				<li><a href="#">Hello,{{Auth::user()->name}}</a></li>
+				<li><a href="{{url('logout')}}">Logout</a></li>
 				</ul>
 			</div>		
 			</div>

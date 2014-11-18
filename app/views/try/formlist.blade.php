@@ -13,14 +13,22 @@ Form List
 
 <?php 
 
-foreach($data as $k => $v)
-echo $v['Demo URL'].$v['Order URL'].$v['Description'].$v['Price']."<br>";
 
-//foreach($data as $k =>$v){
-//foreach($v as $key => $value)
-//echo $key."        ".$value." ";
-//echo "<br>";
-//}
+
+foreach($data as $k =>$v){
+ echo $k;
+ 
+ if($v['Type'] == 'Template')
+ echo $v['Demo URL'];
+ elseif($v['Type'] == 'DomainName')
+ echo $v['Domain Name']." ".$v['Service Year'];
+ elseif($v['Type'] == 'EnterpriseEmail')
+ echo $v['Provider'];
+ 
+ echo "<br>";
+}
+
+//echo $data;
 
 
 ?>

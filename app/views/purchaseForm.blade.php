@@ -127,16 +127,6 @@
 	$('#templateForm').bootstrapValidator('resetForm', true);
     });
 	
-	
-	//renew the total price
-	totalPrice();
-	
-	//save table value into tableData	
-	var tableData = $("#templateFormListTable").tableToJSON({ 
-	ignoreColumns: [5]}); //convert table value to JSON and ignore the 5th column	
-	var tableDataString = JSON.stringify(tableData);	
-	$("#tableJSON").val(tableDataString);
-	
 	}// end isValid
    
 	  
@@ -204,15 +194,6 @@
     });
 	
 	
-	//renew the total price
-	totalPrice();
-	
-	//save table value into tableData	
-	var tableData = $("#domainNameFormListTable").tableToJSON({ 
-	ignoreColumns: [5]}); //convert table value to JSON and ignore the 5th column	
-	var tableDataString = JSON.stringify(tableData);	
-	$("#tableJSON").val(tableDataString);
-	
 	}// end isValid  
 	  
         break;}
@@ -237,7 +218,7 @@
 	if(editTag =='old')
 	bv.validate();
 	
-		if(bv.isValid()){
+	if(bv.isValid()){
 	
 	
 	if(editTag =='new'){
@@ -285,28 +266,170 @@
     $(this).find('form')[0].reset();
 	$('#enterpriseEmailForm').bootstrapValidator('resetForm', true);
     });
+		
+	}// end isValid  
 	
+        break;	}	
+    case 'plugin': {
+     
+	 var type ='Plugin';
+	
+	// Get validator instance
+	var bv = $('#pluginForm').data('bootstrapValidator');
+	
+	var demoURL = $("#pluginForm").find('input[id="demoURL"]').val();
+	var orderURL = $("#pluginForm").find('input[id="orderURL"]').val();
+	var description = $("#pluginForm").find('textarea#description').val();
+	
+	price = $("#pluginForm").find('input[id="price"]').val();	
+
+	//validate data if the form is old
+	if(editTag =='old')
+	bv.validate();
+	
+    if(bv.isValid()){
+	
+	
+	if(editTag =='new'){
+	
+	//add new row to form table
+	var formValue = 
+	"<tr><td style='display:none;'>Plugin</td>"+
+	"<td>"+demoURL+"</td>"+
+	"<td>"+orderURL+"</td>"+
+	"<td>"+description+"</td>"+
+	"<td>"+price+"</td>"+
+	"<td><button type='button' class='edit btn-info'>Edit</button>"+
+	"<button type='button' class='delete btn-info'>Delete</button></td>"+
+	"</tr>";
+	
+	
+	 //add a new row to table based on the form
+	$('#pluginFormListTable tbody').append(formValue);
+	
+	//prevent fire several times
+	$(".edit").unbind('click').bind("click", Edit);
+	$(".delete").unbind('click').bind("click", Delete);
+	}else{
+	//change old form 
+	
+	$('#pluginFormListTable tr').eq(formIndex+1).find('td:eq(1)').text(demoURL);
+	$('#pluginFormListTable tr').eq(formIndex+1).find('td:eq(2)').text(orderURL);
+	$('#pluginFormListTable tr').eq(formIndex+1).find('td:eq(3)').text(description);
+	$('#pluginFormListTable tr').eq(formIndex+1).find('td:eq(4)').text(price);
+	
+	//alert($('#pluginFormListTable tr').eq(formIndex+1).find('td:eq(1)').text());
+	
+	}
+	  
+	 	//hide the modal after saving the form
+	$(".modal").modal('hide'); //hide modal
+	
+	//reset modal
+	$('.modal').on('hidden.bs.modal', function(){
+    $(this).find('form')[0].reset();
+	$('#pluginForm').bootstrapValidator('resetForm', true);
+    });
+	
+	}// end isValid
+	 
+        break;}
+    case 'other': {
+     
+	 var type ='Other';
+	
+	// Get validator instance
+	var bv = $('#otherTypeForm').data('bootstrapValidator');
+	
+	var demoURL = $("#otherTypeForm").find('input[id="demoURL"]').val();
+	var description = $("#otherTypeForm").find('textarea#description').val();
+	
+	price = $("#otherTypeForm").find('input[id="price"]').val();	
+
+	//validate data if the form is old
+	if(editTag =='old')
+	bv.validate();
+	
+    if(bv.isValid()){
+	
+	
+	if(editTag =='new'){
+	
+	//add new row to form table
+	var formValue = 
+	"<tr><td style='display:none;'>Other</td>"+
+	"<td>"+demoURL+"</td>"+
+	"<td>"+description+"</td>"+
+	"<td>"+price+"</td>"+
+	"<td><button type='button' class='edit btn-info'>Edit</button>"+
+	"<button type='button' class='delete btn-info'>Delete</button></td>"+
+	"</tr>";
+	
+	
+	 //add a new row to table based on the form
+	$('#otherTypeFormListTable tbody').append(formValue);
+	
+	//prevent fire several times
+	$(".edit").unbind('click').bind("click", Edit);
+	$(".delete").unbind('click').bind("click", Delete);
+	}else{
+	//change old form 
+	
+	$('#otherTypeFormListTable tr').eq(formIndex+1).find('td:eq(1)').text(demoURL);
+	$('#otherTypeFormListTable tr').eq(formIndex+1).find('td:eq(2)').text(description);
+	$('#otherTypeFormListTable tr').eq(formIndex+1).find('td:eq(3)').text(price);
+	
+	//alert($('#otherTypeFormListTable tr').eq(formIndex+1).find('td:eq(1)').text());
+	
+	}
+	  
+	 	//hide the modal after saving the form
+	$(".modal").modal('hide'); //hide modal
+	
+	//reset modal
+	$('.modal').on('hidden.bs.modal', function(){
+    $(this).find('form')[0].reset();
+	$('#otherTypeForm').bootstrapValidator('resetForm', true);
+    });
+	
+	}// end isValid
+	 	 
+        break;	}		
+	}//end switch
+		
+	
+	
+	
+	//hide or show table div after add purchase form
+	isTableEmpty();
+	
+	//save table value into tableData	
+	var templateTableData = $("#templateFormListTable").tableToJSON({ 
+	ignoreColumns: [5]}); //convert table value to JSON and ignore the 5th column	
+	
+	var domainNameTableData = $("#domainNameFormListTable").tableToJSON({ 
+	ignoreColumns: [5]}); //convert table value to JSON and ignore the 5th column
+
+    var enterpriseEmailTableData = 	$("#enterpriseEmailFormListTable").tableToJSON({ 
+	ignoreColumns: [8]}); //convert table value to JSON and ignore the 5th column
+	
+	var pluginTableData = 	$("#pluginFormListTable").tableToJSON({ 
+	ignoreColumns: [5]}); //convert table value to JSON and ignore the 5th column
+	
+	var otherTableData = 	$("#otherTypeFormListTable").tableToJSON({ 
+	ignoreColumns: [4]}); //convert table value to JSON and ignore the 5th column
+	
+	//var dataTable = $.merge(templateTableData, domainNameTableData);
+	var dataTable = templateTableData.concat(domainNameTableData).concat(enterpriseEmailTableData).concat(pluginTableData).concat(otherTableData);
+	
+	//var dataTable = {'1':templateTableData, '2':domainNameTableData, '3':enterpriseEmailTableData }
+	
+	var tableDataString = JSON.stringify(dataTable);	
+	$("#tableJSON").val(tableDataString);	
 	
 	//renew the total price
 	totalPrice();
 	
-	//save table value into tableData	
-	var tableData = $("#enterpriseEmailFormListTable").tableToJSON({ 
-	ignoreColumns: [5]}); //convert table value to JSON and ignore the 5th column	
-	var tableDataString = JSON.stringify(tableData);	
-	$("#tableJSON").val(tableDataString);
-	
-	}// end isValid  
-	
-        break;	}	
-    case '4': {
-      $('#pluginModal').modal(); 
-        break;}
-    case '5': {
-      $('#otherTypeModal').modal();
-        break;	}		
-	}//end switch
-		
 	});// end formSave function
 	
 	
@@ -319,23 +442,56 @@
 	$('.modal').on('hidden.bs.modal', function(){
     $(this).find('form')[0].reset();
 	$('#templateForm').bootstrapValidator('resetForm', true);
+	$('#domainNameForm').bootstrapValidator('resetForm', true);
+	$('#enterpriseEmailForm').bootstrapValidator('resetForm', true);
+	$('#pluginForm').bootstrapValidator('resetForm', true);
+	$('#otherTypeForm').bootstrapValidator('resetForm', true);
+	
     });
 	
 	});// end formCnacel button
+
+	/*
+	*build tool tip for input text field
+	*/ 
+	$('input[type=text][name=projectCName]').tooltip({
+    placement: "top",
+    trigger: "focus"
+	});
+
+
+	/*
+	*build tool tip for input text field
+	*/ 
+	$('input[type=text][name=projectEName]').tooltip({
+    placement: "top",
+    trigger: "focus"
+	});
+
 	
 	/*
-	* set the function of submit button 
-	*/	
-   $("#submit").click(function(){
+	*build tool tip for input text field
+	*/ 
+	$('input[type=text][name=sYear]').tooltip({
+    placement: "top",
+    trigger: "focus"
+	});
 	
-	//reset modal
-	$('.modal').on('hidden.bs.modal', function(){
-    $(this).find('form')[0].reset();
-	$('#templateForm').bootstrapValidator('resetForm', true);
-    });
-	
-	});// end submit button
-	
+	/*
+	*build tool tip for input text field
+	*/ 
+	$('input[type=text][name=dStorage]').tooltip({
+    placement: "top",
+    trigger: "focus"
+	});
+
+	/*
+	*build tool tip for input text field
+	*/ 
+	$('input[type=text][name=aAmount]').tooltip({
+    placement: "top",
+    trigger: "focus"
+	});
 		
 	/*
 	* build validator for each form
@@ -366,6 +522,10 @@
                     },
                     numeric: {
                         message: 'The price must be a number'
+                    },
+					regexp: {
+                        regexp: /^\d+(\.\d{1,2})?$/i,
+                        message: 'The price have most 2 digits after decimal point'
                     }
                 }
             }
@@ -402,6 +562,10 @@
                     },
                     numeric: {
                         message: 'The price must be a number'
+                    },
+					regexp: {
+                        regexp: /^\d+(\.\d{1,2})?$/i,
+                        message: 'The price have most 2 digits after decimal point'
                     }
                 }
             }
@@ -466,12 +630,119 @@
                     },
                     numeric: {
                         message: 'The price must be a number'
+                    },
+			regexp: {
+                        regexp: /^\d+(\.\d{1,2})?$/i,
+                        message: 'The price have most 2 digits after decimal point'
                     }
                 }
             }
 
         }
     });//end enterprise email form validation
+	
+	
+	//  build validator for plugin form
+	$('#pluginForm').bootstrapValidator({
+				excluded: [':disabled'],
+        fields: {
+            dURL: {
+                message: 'The demo URL is not valid',
+                validators: {
+                    notEmpty: {
+                        message: 'The demo URL is required and cannot be empty'
+                    }
+                }
+            },
+            oURL: {
+                message: 'The order URL is not valid',
+                validators: {
+                    notEmpty: {
+                        message: 'The order URL is required and cannot be empty'
+                    }
+                }
+            },			
+			projectPrice: {
+                validators: {
+                    notEmpty: {
+                        message: 'The price is required'
+                    },
+                    numeric: {
+                        message: 'The price must be a number'
+                    },
+			regexp: {
+                        regexp: /^\d+(\.\d{1,2})?$/i,
+                        message: 'The price have most 2 digits after decimal point'
+                    }
+                }
+            }
+
+        }
+    });//end plugin form validation
+	
+	//  build validator for other type form
+	$('#otherTypeForm').bootstrapValidator({
+				excluded: [':disabled'],
+        fields: {
+            dURL: {
+                message: 'The demo URL is not valid',
+                validators: {
+                    notEmpty: {
+                        message: 'The demo URL is required and cannot be empty'
+                    }
+                }
+            },		
+			projectPrice: {
+                validators: {
+                    notEmpty: {
+                        message: 'The price is required'
+                    },
+                    numeric: {
+                        message: 'The price must be a number'
+                    },
+					regexp: {
+                        regexp: /^\d+(\.\d{1,2})?$/i,
+                        message: 'The price have most 2 digits after decimal point'
+                    }
+                }
+            }
+
+        }
+    });//end plugin form validation
+	
+	//  build validator for order form
+	$('#orderForm').bootstrapValidator({
+		excluded: [':disabled', ':hidden', ':not(:visible)'],
+        fields: {
+            customerName: {
+                message: 'The customer name is not valid',
+                validators: {
+                    notEmpty: {
+                        message: 'The customer name is required and cannot be empty'
+                    }
+                }
+            },
+			projectCName: {
+                message: 'The Chinese name is not valid',
+                validators: {
+                    notEmpty: {
+                        message: 'The Chinese name is required and cannot be empty'
+                    }
+                }
+            },
+			projectEName: {
+                message: 'The English name is not valid',
+                validators: {
+                    notEmpty: {
+                        message: 'The English name is required and cannot be empty'
+                    }
+                }
+            }
+				
+        }
+    });//end order form validation
+	
+
 	
 	
 	//add edit function for edit button on  templateFormListTable
@@ -571,13 +842,75 @@
     typeTag = 'enterpriseEmail';	  
 	
         break;	}	
-    case '4': {
-      $('#pluginModal').modal(); 
+    case 'pluginDiv': {
+      
+	//get the value of first cell in this table, namely the demo URL
+	var dURL = $(this).closest('tr').find('td:eq(1)').text();
+	
+	//get the value of second cell in this table, namely the order URL
+	var oURL = $(this).closest('tr').find('td:eq(2)').text();
+	
+	//get the value of third cell in this table, namely description
+	var description = $(this).closest('tr').find('td:eq(3)').text();
+	
+	//get the value of third cell in this table, namely the price
+	var price = $(this).closest('tr').find('td:eq(4)').text();
+	
+    $('#pluginModal').modal();
+	$("#pluginForm").find('input[id="demoURL"]').val(dURL);
+	$("#pluginForm").find('input[id="orderURL"]').val(oURL);
+	$("#pluginForm").find('textarea[id="description"]').val(description);
+	$("#pluginForm").find('input[id="price"]').val(price);
+
+    typeTag = 'plugin';	  
+	  
         break;}
-    case '5': {
-      $('#otherTypeModal').modal();
+    case 'otherTypeDiv': {
+     
+	 	//get the value of first cell in this table, namely the demo URL
+	var dURL = $(this).closest('tr').find('td:eq(1)').text();
+	
+	//get the value of third cell in this table, namely description
+	var description = $(this).closest('tr').find('td:eq(2)').text();
+	
+	//get the value of third cell in this table, namely the price
+	var price = $(this).closest('tr').find('td:eq(3)').text();
+	
+    $('#otherTypeModal').modal();
+	$("#otherTypeForm").find('input[id="demoURL"]').val(dURL);
+	$("#otherTypeForm").find('textarea[id="description"]').val(description);
+	$("#otherTypeForm").find('input[id="price"]').val(price);
+
+    typeTag = 'other';	
+	 
+		 
         break;	}		
 	}//end switch
+		
+	//save table value into tableData	
+	var templateTableData = $("#templateFormListTable").tableToJSON({ 
+	ignoreColumns: [5]}); //convert table value to JSON and ignore the 5th column	
+	
+	var domainNameTableData = $("#domainNameFormListTable").tableToJSON({ 
+	ignoreColumns: [5]}); //convert table value to JSON and ignore the 5th column
+
+    var enterpriseEmailTableData = 	$("#enterpriseEmailFormListTable").tableToJSON({ 
+	ignoreColumns: [8]}); //convert table value to JSON and ignore the 5th column
+	
+	var pluginTableData = 	$("#pluginFormListTable").tableToJSON({ 
+	ignoreColumns: [5]}); //convert table value to JSON and ignore the 5th column
+	
+	var otherTableData = 	$("#otherTypeFormListTable").tableToJSON({ 
+	ignoreColumns: [4]}); //convert table value to JSON and ignore the 5th column
+	
+	//var dataTable = $.merge(templateTableData, domainNameTableData);
+	var dataTable = templateTableData.concat(domainNameTableData).concat(enterpriseEmailTableData).concat(pluginTableData).concat(otherTableData);
+	
+	//var dataTable = {'1':templateTableData, '2':domainNameTableData, '3':enterpriseEmailTableData }
+	
+	var tableDataString = JSON.stringify(dataTable);	
+	$("#tableJSON").val(tableDataString);
+	
 	
 	}//end Edit funtion
 	
@@ -586,13 +919,46 @@
 	
 	var par = $(this).parent().parent(); //tr
 	par.remove();
-	totalPrice();
-	}
+	
+	//hide or show table div after delete
+	isTableEmpty();
+	
+	//save table value into tableData	
+	var templateTableData = $("#templateFormListTable").tableToJSON({ 
+	ignoreColumns: [5]}); //convert table value to JSON and ignore the 5th column	
+	
+	var domainNameTableData = $("#domainNameFormListTable").tableToJSON({ 
+	ignoreColumns: [5]}); //convert table value to JSON and ignore the 5th column
+
+    var enterpriseEmailTableData = 	$("#enterpriseEmailFormListTable").tableToJSON({ 
+	ignoreColumns: [8]}); //convert table value to JSON and ignore the 5th column
+	
+	var pluginTableData = 	$("#pluginFormListTable").tableToJSON({ 
+	ignoreColumns: [5]}); //convert table value to JSON and ignore the 5th column
+	
+	var otherTableData = 	$("#otherTypeFormListTable").tableToJSON({ 
+	ignoreColumns: [4]}); //convert table value to JSON and ignore the 5th column
+	
+	//var dataTable = $.merge(templateTableData, domainNameTableData);
+	var dataTable = templateTableData.concat(domainNameTableData).concat(enterpriseEmailTableData).concat(pluginTableData).concat(otherTableData);
+	
+	//var dataTable = {'1':templateTableData, '2':domainNameTableData, '3':enterpriseEmailTableData }
+	
+	var tableDataString = JSON.stringify(dataTable);	
+	$("#tableJSON").val(tableDataString);
 	
 	//re-calculate the total price
 	totalPrice();
+	
+	}//end delete function
+	
+	//hide or show table div
+	isTableEmpty();
+	
+	//calculate the total price
+	totalPrice();
 		
-	});
+	});//end document.ready
 	
 	
 	
@@ -637,10 +1003,44 @@
 	}); 
 	}); 
 	
-	
+	total = total.toFixed(2);
 	$("#totalPrice").val(total);
 	
 	}//end totalPrice()
+	
+	
+	
+	
+	//hide table if table is empty
+	function isTableEmpty(){
+	
+	if($("#templateFormListTable tr").length ==1)
+	$('#templateListDiv').hide();
+	else
+	$('#templateListDiv').show();
+	
+	if($("#domainNameFormListTable tr").length ==1)
+	$('#domainNameListDiv').hide();
+	else
+	$('#domainNameListDiv').show();
+	
+	if($("#enterpriseEmailFormListTable tr").length ==1)
+	$('#enterpriseEmailListDiv').hide();
+	else
+	$('#enterpriseEmailListDiv').show();
+	
+	if($("#pluginFormListTable tr").length ==1)
+	$('#pluginListDiv').hide();
+	else
+	$('#pluginListDiv').show();
+
+	if($("#otherTypeFormListTable tr").length ==1)
+	$('#otherTypeListDiv').hide();	
+	else
+	$('#otherTypeListDiv').show();	
+	
+	
+	}//end isTableEmpty()
 	
 	
 	</script>
@@ -652,31 +1052,29 @@ Purchase Form Test
 @stop
 
 @section('jumbotron')
-<h1>Hello {{Auth::user()->name;}}</h1>
+<h1>Order Purchase</h1>
 @stop
 
 @section('navigation')
-        <li><a href="{{ URL::to('main') }}">Home</a></li>
+        <li><a href="{{ URL::to('main') }}">Main</a></li>
+	
 @stop
 
 
 @section('content')
 
-
-       
-		
-		    <div class="row">
-				<div class="col-md-8 col-md-offset-2"> <!-- center a div-->
-				<div class="well">
-				<!--Add Form Content -->
-				
-
-
-	
 <!-- build a form -->
-{{ Form::open(array('url' => 'order')) }}
-
-
+{{ Form::open(array('url' => 'makeOrder', 'id'=>'orderForm')) }} 
+       	
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2"> <!-- center a div-->
+		<div class="well">
+	<!-- will be used to show any messages -->
+	@if (Session::has('message'))
+    <div class="alert alert-info">{{ Session::get('message') }}</div>
+	@endif
+		
+<!--Add Form Content -->
 <!-- Add item radio group --> 
   <div class="form-group"><!-- Customer name text field -->
     <label for="formCustomer" class="col-sm-4 control-label">Customer Name</label>
@@ -687,13 +1085,13 @@ Purchase Form Test
   <div class="form-group">
     <label for="formCName"" class="col-sm-4 control-label">Project Chinese Name</label>
     <div class="col-sm-8">
-      <input type="text" class="form-control" id="formCName" name="projectCName" placeholder="Project's Chinese name">
+      <input type="text" class="form-control" title="Project Chinese name and English name can be the same" id="formCName" name="projectCName" placeholder="Project's Chinese name">
     </div>
   </div>
    <div class="form-group">
     <label for="formEName" class="col-sm-4 control-label">Project English Name</label>
     <div class="col-sm-8">
-      <input type="text" class="form-control" id="formEName" name="projectEName" placeholder="Project's English name">
+      <input type="text" class="form-control" title="Project Chinese name and English name can be the same" id="formEName" name="projectEName" placeholder="Project's English name">
     </div>
   </div>
 <b>What kind of item do you want to purchase:</b><br>
@@ -723,9 +1121,9 @@ Purchase Form Test
 
 
     <!-- Template Form div --> 
+	<div class="row" id="templateListDiv">
 	<fieldset>
 	<legend>Template Form List</legend>
-	<div class="row">
 		<div class="col-md-10 col-md-offset-1"> <!-- center a div-->
 		<div id="templateDiv" class="well">
 	    <!-- Form List Content -->
@@ -750,14 +1148,14 @@ Purchase Form Test
 	
 	</div>
 	</div>
-	</div> 
 	</fieldset>
+	</div> 
 	<!-- ./Template Form div --> 
 
     <!-- Domain Name Form div --> 
+	<div  class="row" id='domainNameListDiv'>
 	<fieldset>
 	<legend>Domain Name Form List</legend>
-	<div  class="row">
 		<div class="col-md-10 col-md-offset-1"> <!-- center a div-->
 		<div id='domainNameDiv' class="well">
 	    <!-- Form List Content -->
@@ -781,13 +1179,13 @@ Purchase Form Test
 	
 	</div>
 	</div>
-	</div> 
-	</fieldset><!-- ./Domain Name Form div--> 
+	</fieldset>
+	</div> <!-- ./Domain Name Form div--> 
 	
 	<!-- Enterprise Email Form div --> 
+	<div  class="row" id="enterpriseEmailListDiv">
 	<fieldset>
 	<legend>Enterprise Email Form List</legend>
-	<div  class="row">
 		<div class="col-md-10 col-md-offset-1"> <!-- center a div-->
 		<div id="enterpriseEmailDiv" class="well">
 	    <!-- Form List Content -->
@@ -814,15 +1212,15 @@ Purchase Form Test
 	
 	</div>
 	</div>
-	</div> 
-	</fieldset><!-- ./Enterprise Email Form div--> 
+	</fieldset>
+	</div><!-- ./Enterprise Email Form div--> 
 	
 	<!-- Plugins Form div --> 
+	<div class="row"  id="pluginListDiv">
 	<fieldset>
 	<legend>Plugins Form List</legend>
-	<div id="pluginDiv"  class="row">
 		<div class="col-md-10 col-md-offset-1"> <!-- center a div-->
-		<div class="well">
+		<div id="pluginDiv"  class="well">
 	    <!-- Form List Content -->
 		 
 		<table id='pluginFormListTable' class='table table-bordered'>
@@ -845,15 +1243,16 @@ Purchase Form Test
 	
 	</div>
 	</div>
-	</div> 
 	</fieldset><!-- ./Plugins Form div --> 
+	</div> 
+
 	
 	<!-- Plugins Form div --> 
+	<div class="row" id="otherTypeListDiv">
 	<fieldset>
 	<legend>Other Form List</legend>
-	<div id="otherTypeDiv"  class="row">
 		<div class="col-md-10 col-md-offset-1"> <!-- center a div-->
-		<div class="well">
+		<div id="otherTypeDiv" class="well">
 	    <!-- Form List Content -->
 		 
 		<table id='otherTypeFormListTable' class='table table-bordered'>
@@ -875,18 +1274,15 @@ Purchase Form Test
 	
 	</div>
 	</div>
-	</div> 
-	</fieldset><!-- ./Plugins Form div --> 
+	</fieldset>
+	</div> <!-- ./Plugins Form div --> 
 
 
 	<div class="row">
 	<div class="col-md-8 col-md-offset-2"> <!-- center a div-->
 	<div class="well">
 	
-	<!-- will be used to show any messages -->
-	@if (Session::has('message'))
-    <div class="alert alert-info">{{ Session::get('message') }}</div>
-	@endif
+
 	
 	<!-- Form comment and submit -->
 	<div class="row">
@@ -901,6 +1297,20 @@ Purchase Form Test
     </div>
 	</div>
 	
+	<!-- Selector -->
+	<div class="row">
+	<label for="requestDate" class="col-sm-4 control-label">Preferred Authorizer</label>
+    <div class="col-sm-4">
+		<select id='authorizerSelector' name='authorizerSelector'>
+		<option value='none'>None</option>
+		@foreach($user as $key => $value)
+        <option value='{{ $value['id'] }}'>{{$value['name']}}</option>
+		@endforeach	
+		</select>
+    </div>	
+
+	</div>
+	
 	 <div class="row">
     <label for="comment" class="col-sm-2 control-label">Comment</label>
     <div class="col-sm-10">
@@ -909,17 +1319,17 @@ Purchase Form Test
 	<div class='col-md-12 text-center'>
     <!-- <button id='submit' class='btn btn-info'>Submit </button> -->
 	
-	{{ Form::hidden('tableData',"", array('id' => 'tableJSON')) }}
-	{{ Form::submit('Submit Order!', array('class' => 'btn btn-primary')) }}
-
-	{{ Form::close() }}
+	{{ Form::hidden('tableData',"", array('id' => 'tableJSON')) }}	
+	{{ Form::submit('Submit Order', array('class' => 'btn btn-info')) }}
+	<button type="button"  class="btn btn-info" onclick="window.location='{{ url('main') }}'">Back to List</button>
+	 
 	</div>
     </div>				
 				
 	</div>
 	</div>
     </div>
-	
+	{{ Form::close() }} <!-- close form -->
 	
 
 <!-- Template Modal -->
@@ -994,9 +1404,9 @@ Purchase Form Test
     </div>
   </div>
   <div class="form-group">
-    <label for="serviceYear" class="col-sm-4 control-label">Year of service</label>
-    <div class="col-sm-8">
-      <input type="text" class="form-control" id="serviceYear" name='sYear' placeholder="How many years do you want">
+    <label for="serviceYear" class="col-sm-4 control-label">Year of service (Month)</label>
+    <div class="col-sm-8">	
+    	<input type="text" class="form-control" title="unlimited = -1" id="serviceYear" name='sYear' placeholder="How many years do you want">
   </div>
   </div>
    <div class="form-group">
@@ -1055,21 +1465,21 @@ Purchase Form Test
     </div>
   </div>
    <div class="form-group">
-    <label for="storage" class="col-sm-4 control-label">Storage</label>
+    <label for="storage" class="col-sm-4 control-label">Storage (mb)</label>
     <div class="col-sm-8">
-      <input type="text" class="form-control" id="storage" name='dStorage' placeholder="storage">
+      <input type="text" class="form-control" title="unlimited = -1" id="storage" name='dStorage' placeholder="storage">
     </div>
   </div>
     <div class="form-group">
     <label for="accountAmount" class="col-sm-4 control-label">Account amount</label>
     <div class="col-sm-8">
-      <input type="text" class="form-control" id="accountAmount" name="aAmount" placeholder="How many accounts do you want">
+      <input type="text" class="form-control" title="unlimited = -1" id="accountAmount" name="aAmount" placeholder="How many accounts do you want">
     </div>
   </div>
   <div class="form-group">
-    <label for="serviceYear" class="col-sm-4 control-label">Year of service</label>
+    <label for="serviceYear" class="col-sm-4 control-label">Year of service (Month)</label>
     <div class="col-sm-8">
-      <input type="text" class="form-control" id="serviceYear" name="sYear" placeholder="How many years do you want">
+      <input type="text" class="form-control" title="unlimited = -1" id="serviceYear" name="sYear" placeholder="How many years do you want">
   </div>
   </div>
    <div class="form-group">
@@ -1138,13 +1548,15 @@ Purchase Form Test
     </div>
   </div>
 
-</form>
+
    
       </div>
       <div class="modal-footer">
-	   <button type="button"  class="formSave btn-primary" >Save Form</button>
+	   <button type="submit"  class="formSave btn-primary" >Save Form</button>
        <button type="button" class="formCancel btn-default" data-dismiss="modal">Cancel</button>      
       </div>
+	  
+	  </form>
 	  
     </div>
   </div>
@@ -1183,13 +1595,15 @@ Purchase Form Test
     </div>
   </div>
 
-</form>
+
    
       </div>
       <div class="modal-footer">
-	   <button type="button"  class="formSave btn-primary" >Save Form</button>
+	   <button type="submit"  class="formSave btn-primary" >Save Form</button>
        <button type="button" class="formCancel btn-default" data-dismiss="modal">Cancel</button>      
       </div>
+	  
+	  </form>
 	  
     </div>
   </div>

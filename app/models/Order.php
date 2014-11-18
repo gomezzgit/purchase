@@ -14,7 +14,11 @@ use UserTrait, RemindableTrait;
  *
  * @var string
  */
-protected $table = 'order';
+protected $table = 'orders';
+
+protected $fillable = ['customer_name', 'chinese_name', 'english_name', 
+		'state','requested_at','authorised_at','requested_by','authorised_by',
+		'prefer_authorizer','final_price','comment'];
 
 /**
  * Disabling Auto Timestamps

@@ -1,22 +1,23 @@
 <?php
 
-class TemplateTableSeeder extends Seeder
+class PluginTableSeeder extends Seeder
 {
 
 	public function run()
 	{
-		//DB::table('template')->delete();
+		DB::table('plugin')->delete();
 		
 		// Truncate the table, auto-increment has been reset.
-		//DB::table('template')->truncate();
+		DB::table('plugin')->truncate();
+		
 		
 	$faker = Faker\Factory::create();
 		
 	for ($i = 0; $i < 40; $i++){
 	
-		Template::create(array(
+		Plugin::create(array(
 			'orderid'     => $faker->numberBetween($min = 5, $max = 50), 
-			'type'    => 'Template',
+			'type'    => 'Plugin',
 			'demoURL'    => $faker->url,
 			'orderURL'    =>$faker->url,
 			'description' => $faker->sentence($nbWords = 5),
@@ -24,7 +25,6 @@ class TemplateTableSeeder extends Seeder
 		)); 
 
 	}	
-			
 		
 	}
 

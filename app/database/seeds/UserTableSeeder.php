@@ -5,18 +5,19 @@ class UserTableSeeder extends Seeder
 
 	public function run()
 	{
-		DB::table('users')->delete();
-		User::create(array(
-			'name'     => 'Chris',
-			'email'    => 'chris@scotch.io',
-			'password' => Hash::make('123456'),
-		));
 		
+	$faker = Faker\Factory::create();
+		
+	for ($i = 0; $i < 3; $i++)
+	{
 		User::create(array(
-			'name'     => 'Eric',
-			'email'    => 'Eric@gmail.com',
-			'password' => Hash::make('123'),
-		));
+			'name'     => $faker->userName,
+			'email'    => $faker->email,
+			'authority'    =>$faker->randomElement($array = array ('user','admin','manager')),
+			'password' => Hash::make('123456'),
+		)); 
+
+	}
 	}
 
 }
