@@ -9,6 +9,7 @@
         {{ HTML::style('css/bootstrap.css') }}
         {{ HTML::style('css/bootstrap-theme.css') }}
 		{{ HTML::style('css/bootstrapValidator.min.css') }}
+		{{ HTML::style('css/table-theme.css') }}  <!--my table theme -->
 		
 		<!-- Scripts are placed here -->
         {{ HTML::script('js/jquery-1.11.1.min.js') }}
@@ -34,7 +35,8 @@
 				<a class="navbar-brand" rel="home" href="http://acnw.com.au">ACNW</a>
 			</div>
 			<div class="collapse navbar-collapse">	
-				<ul class="nav navbar-nav">					
+				<ul class="nav navbar-nav">	
+				@yield('navigation_left')					
 				</ul>
 			<div class="col-sm-3 col-md-3 pull-right">		
 				<ul class="nav navbar-nav navbar-right">

@@ -66,11 +66,15 @@ Route::get('auth', function()
 	Route::group(array('before' => 'auth'), function()
 	{
 	
-    Route::get('pf', 'HomeController@showOrderPage');
-	
-	Route::get('main', 'HomeController@showMainpage');
-//	Route::post('makeOrder', 'OrderController@showForm');  //for test
+	//	Route::post('makeOrder', 'OrderController@showForm');  //for test
 	Route::post('makeOrder', 'OrderController@storeOrder');
+	
+	//render pages 
+    Route::get('pf', 'HomeController@showOrderPage');	
+	Route::get('main', 'HomeController@showMainpage');
+	Route::get('domainname', 'HomeController@showDomainPage');
+	
+	
 	Route::get('show/{id}','OrderController@showOrderDetail');  //show order detail based on order ID
 	Route::get('modify/{id}','OrderController@orderModifyPage');  //show order modify page based on order ID
 	Route::get('authorize/{id}','OrderController@orderAuthorizePage');  //show order authorize page based on order ID

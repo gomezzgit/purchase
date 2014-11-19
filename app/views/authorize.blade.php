@@ -227,7 +227,7 @@ Order Detail
 			<th>Account Number</th>
 			<th>Service Year</th>
 			<th>Description</th>
-			<th>Price/</th>
+			<th>Price</th>
 			
 		</tr>
 		</thead>
@@ -286,7 +286,7 @@ Order Detail
 			<th>Demo URL</th>
 			<th>Order URL</th>
 			<th>Description</th>
-			<th>Price/100</th>			
+			<th>Price</th>			
 		</tr>
 		</thead>
 		

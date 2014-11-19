@@ -53,6 +53,12 @@
 Form List
 @stop
 
+
+@section('navigation_left')
+		<li><a href="{{ URL::to('pf') }}">Create Order</a></li>
+		<li><a href="{{ URL::to('domainname') }}">Domain name list</a></li>
+@stop
+
 @section('navigation_right')
 <li><a href="#">Hello,{{Auth::user()->name}}</a></li>		
 @stop	
@@ -81,12 +87,10 @@ Form List
 			<div class="well">
 			<!--Show submitted order list -->
 
-	<table id='myOrderTable' class='table table-bordered'>
+	<table id='myOrderTable' class='table table-bordered table-hover'>
 		<thead>
         <tr>
 		<th>Order id</th>
-		<th>Cusomter name</th>
-		<th>Project Chinese name</th>
 		<th>Project English name</th>
 		<th>State</th>
 		<th>Requested date</th>
@@ -99,8 +103,6 @@ Form List
 		@if($value->state !='finished')
         <tr>
             <td>{{ $value->id }}</td>
-            <td>{{ $value->customer_name}}</td>
-            <td>{{ $value->chinese_name }}</td>
             <td>{{ $value->english_name }}</td>
 			<td>{{ $value->state }}</td>
 			<td>{{ $value->requested_at }}</td>
@@ -128,12 +130,10 @@ Form List
 		<div class="well">
 	    <!-- Form List Content -->
 		 
-		<table id='myFinishedOrderTable' class='table table-bordered'>
+		<table id='myFinishedOrderTable' class='table table-bordered table-hover'>
 		<thead>
         <tr>
 		<th>Order id</th>
-		<th>Cusomter name</th>
-		<th>Project Chinese name</th>
 		<th>Project English name</th>
 		<th>State</th>
 		<th>Requested date</th>
@@ -146,8 +146,6 @@ Form List
 		@if($value->state =='finished')
         <tr>
             <td>{{ $value->id }}</td>
-            <td>{{ $value->customer_name}}</td>
-            <td>{{ $value->chinese_name }}</td>
             <td>{{ $value->english_name }}</td>
 			<td>{{ $value->state }}</td>
 			<td>{{ $value->requested_at }}</td>
@@ -178,12 +176,10 @@ Form List
 		<div class="well">
 	    <!-- Form List Content -->
 		 
-		<table id='allOrderTable' class='table table-bordered'>
+		<table id='allOrderTable' class='table table-bordered table-hover'>
 		<thead>
         <tr>
 		<th>Order id</th>
-		<th>Cusomter name</th>
-		<th>Project Chinese name</th>
 		<th>Project English name</th>
 		<th>State</th>
 		<th>Requested date</th>
@@ -199,8 +195,6 @@ Form List
 		@if($value->state !='finished')
         <tr>
             <td>{{ $value->id }}</td>
-            <td>{{ $value->customer_name}}</td>
-            <td>{{ $value->chinese_name }}</td>
             <td>{{ $value->english_name }}</td>
 			<td>{{ $value->state }}</td>
 			<td>{{ $value->requested_at }}</td>
@@ -233,12 +227,10 @@ Form List
 		<div class="well">
 	    <!-- Form List Content -->
 		 
-		<table id='finishedOrderTable' class='table table-bordered'>
+		<table id='finishedOrderTable' class='table table-bordered table-hover'>
 		<thead>
         <tr>
 		<th>Order id</th>
-		<th>Cusomter name</th>
-		<th>Project Chinese name</th>
 		<th>Project English name</th>
 		<th>State</th>
 		<th>Requested date</th>
@@ -254,8 +246,6 @@ Form List
 		@if($value->state =='finished')
         <tr>
             <td>{{ $value->id }}</td>
-            <td>{{ $value->customer_name}}</td>
-            <td>{{ $value->chinese_name }}</td>
             <td>{{ $value->english_name }}</td>
 			<td>{{ $value->state }}</td>
 			<td>{{ $value->requested_at }}</td>
@@ -289,7 +279,7 @@ Form List
 		<div class="well">
 	    <!-- Form List Content -->
 		 
-		<table id='requestedOrderTable' class='table table-bordered'>
+		<table id='requestedOrderTable' class='table table-bordered table-hover'>
 		<thead>
         <tr>
 		<th>Order id</th>

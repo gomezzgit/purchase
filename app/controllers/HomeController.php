@@ -81,4 +81,15 @@ class HomeController extends BaseController {
 	}
 	
 	
+	/*
+	*show domain page to demonstrate all the domain list
+	*/
+	public function showDomainPage()
+	{
+	    $domain = Domainname::all();
+		
+		return View::make('domain')->with('domain',$domain);	
+	}
+	
+	
 	}
