@@ -52,7 +52,17 @@ class HomeController extends BaseController {
 		}
 		else if(Auth::user()->authority =='manager'){
 		
-		$requested= Order::where('prefer_authorizer','=',Auth::user()->id)->get();
+		//return requester's orderlist to manager
+		$requested = Order::where('prefer_authorizer','=',Auth::user()->id)->get();
+		
+		//find requester name based on id
+		foreach($requested as $k => $v){
+		
+		$requester = User::find($v->requested_by);
+		$v->requested_by = $requester->name;	
+		
+		}
+		
 		return View::make('main')->with("orderList",$orderList)->with('requested',$requested);
 		
 		}
