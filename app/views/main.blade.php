@@ -18,6 +18,9 @@
 	if($("#finishedOrderTable tr").length ==1)
 	$('#finishedOrderList').hide();	
 	
+	if($("#requestedOrderTable tr").length ==1)
+	$('#requestedOrderList').hide();	
+	
 	/*
 	*build datatable
 	*/
@@ -303,7 +306,7 @@ Form List
 		
 		<tbody>
 		@foreach($requested as $key => $value)
-		@if($value->state !='finished')
+		@if($value->state =='waiting')
         <tr>
             <td>{{ $value->id }}</td>
             <td>{{ $value->customer_name}}</td>
